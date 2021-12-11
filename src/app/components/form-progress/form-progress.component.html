@@ -1,0 +1,4 @@
+<div class="form-progress">
+  <div class="form-progress-joiner"></div>
+  <span [ngClass]="{'before': item < currentStep, 'current': item === currentStep, 'after': item > currentStep }" *ngFor="let item of steps" class="form-progress-step">{{ item }}</span>
+</div>

@@ -1,0 +1,55 @@
+:host {
+  display: flex;
+  width: max-content;
+}
+
+.form-progress {
+  width: 500px;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+}
+
+.form-progress-joiner {
+  position: absolute;
+  top: 49.5%;
+  width: 98%;
+  height: 1.7px;
+  background-color: #c9c9c9;
+}
+
+.form-progress-step {
+  padding: 7px 14px;
+  border: solid 1px #fafafa;
+  border-radius: 50px;
+  color: #ffffff;
+  z-index: 1000;
+}
+
+.before {
+  background-color: #18c93e;
+}
+
+.current {
+  background-color: #ffb700;;
+}
+
+.after {
+  background-color: #aeafae;
+}
+
+@media screen and (max-width: 600px) {
+  .form-progress {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .form-progress {
+    width: 250px;
+  }
+
+  .form-progress-step {
+    padding: 5px 12px;
+  }
+}

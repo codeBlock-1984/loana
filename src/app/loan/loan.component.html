@@ -1,0 +1,250 @@
+<app-form-progress class="form-progress"
+  [currentStep]="step"
+  [steps]="steps"
+></app-form-progress>
+
+<form class="loan-form" [formGroup]="loanApplicationForm" (ngSubmit)="handleSubmit()">
+  <div [ngSwitch]="step" class="form-inner">
+    <div class="form-step" *ngSwitchCase="1" formGroupName="profile">
+      <h2 class="form-step-title">Profile Information</h2>
+  
+      <div class="form-group">
+        <label for="firstName">First Name </label>
+        <input
+        [ngClass]="{'error': firstName?.invalid && (firstName?.dirty || firstName?.touched)}"
+          id="firstName"
+          type="text"
+          formControlName="firstName"
+          (keyup.enter)="lname.focus()"
+          required>
+      </div>
+  
+      <div class="form-group">
+        <label for="lastName">Last Name </label>
+        <input
+          #lname
+          [ngClass]="{'error': lastName?.invalid && (lastName?.dirty || lastName?.touched)}"
+          id="lastName"
+          type="text"
+          formControlName="lastName"
+          (keyup.enter)="cod.focus()"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="code">Bank Code </label>
+        <input
+          #cod
+          [ngClass]="{'error': code?.invalid && (code?.dirty || code?.touched)}"
+          id="code"
+          type="text"
+          maxlength="6"
+          formControlName="code"
+          (keyup.enter)="gnder.focus()"
+          required>
+        <small
+          *ngIf="(code?.errors?.['pattern']) && (code?.dirty || code?.touched) && !code?.errors?.['required']"
+          class="text-error">
+          Enter a valid 6-digit code
+        </small>
+      </div>
+  
+      <div class="form-group">
+        <label for="gender">Gender </label>
+        <select
+          #gnder
+          [ngClass]="{'error': gender?.invalid && (gender?.dirty || gender?.touched)}"
+          id="gender"
+          type="text"
+          formControlName="gender"
+          (keyup.enter)="db.focus()"
+          required>
+          <option value="">Choose a gender</option>
+          <option *ngFor="let item of genders" [value]="item">{{ item }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="dob">Date of Birth </label>
+        <input
+        #db
+
+        [ngClass]="{'error': dob?.invalid && (dob?.dirty || dob?.touched)}"
+        id="dob"
+        type="text"
+        formControlName="dob"
+        required>
+        <small
+          *ngIf="dob?.errors?.['format'] && (dob?.dirty || dob?.touched) && !dob?.errors?.['required']"
+          class="text-error">
+          Enter valid date in the format dd-mm-yyyy
+        </small>
+        <small
+          *ngIf="dob?.errors?.['val'] && (dob?.dirty || dob?.touched) && !dob?.errors?.['required']"
+          class="text-error">
+          You must be within {{ validAge.min }} and {{ validAge.max }} years
+        </small>
+      </div>
+    </div>
+
+    <div class="form-step" *ngSwitchCase="2" formGroupName="contact">
+      <h2 class="form-step-title">Contact Information</h2>
+  
+      <div class="form-group">
+        <label for="email">Email </label>
+        <input
+        [ngClass]="{'error': email?.invalid && (email?.dirty || email?.touched)}"
+          id="email"
+          type="text"
+          formControlName="email"
+          (keyup.enter)="phone.focus()"
+          required>
+        <small
+          *ngIf="email?.errors?.['email'] && (email?.dirty || email?.touched) && !email?.errors?.['required']"
+          class="text-error">
+          Enter a valid email
+        </small>
+      </div>
+  
+      <div class="form-group">
+        <label for="mobile">Mobile </label>
+        <input
+        #phone
+        [ngClass]="{'error': mobile?.invalid && (mobile?.dirty || mobile?.touched)}"
+        id="mobile"
+        type="text"
+        maxlength="10"
+        formControlName="mobile"
+        (keyup.enter)="add.focus()"
+        required>
+        <small
+          *ngIf="(mobile?.errors?.['pattern']) && (mobile?.dirty || mobile?.touched) && !mobile?.errors?.['required']"
+          class="text-error">
+          Enter a valid 10-digit mobile
+        </small>
+      </div>
+  
+      <div class="form-group">
+        <label for="address">Home Address </label>
+        <input
+        #add
+        [ngClass]="{'error': address?.invalid && (address?.dirty || address?.touched)}"
+        id="address"
+        type="text"
+        formControlName="address"
+        required>
+      </div>
+    </div>
+  
+    <div class="form-step" *ngSwitchCase="3" formGroupName="employment">
+      <h2 class="form-step-title">Employment Information</h2>
+  
+      <div class="form-group">
+        <label for="company">Current Employer </label>
+        <input
+        [ngClass]="{'error': company?.invalid && (company?.dirty || company?.touched)}"
+        id="company"
+        type="text"
+        formControlName="company"
+        (keyup.enter)="rl.focus()"
+        required>
+      </div>
+  
+      <div class="form-group">
+        <label for="role">Role </label>
+        <input
+        #rl
+        [ngClass]="{'error': role?.invalid && (role?.dirty || role?.touched)}"
+        id="role"
+        type="text"
+        formControlName="role"
+        (keyup.enter)="sal.focus()"
+        required>
+      </div>
+  
+      <div class="form-group">
+        <label for="salary">Monthly Salary </label>
+        <input
+        #sal
+        [ngClass]="{'error': salary?.invalid && (salary?.dirty || salary?.touched)}"
+        id="salary"
+        type="number"
+        formControlName="salary"
+        required>
+        <small
+          *ngIf="salary?.errors?.['val'] && (salary?.dirty || salary?.touched) && !salary?.errors?.['required']"
+          class="text-error">
+          Minimum salary is 350
+        </small>
+      </div>
+    </div>
+  
+    <div class="form-step" *ngSwitchCase="4" formGroupName="loan">
+      <h2 class="form-step-title">Loan Information</h2>
+  
+      <div class="form-group">
+        <label for="amount">Amount </label>
+        <input
+        [ngClass]="{'error': amount?.invalid && (amount?.dirty || amount?.touched)}"
+        id="amount"
+        type="number"
+        formControlName="amount"
+        (keyup.enter)="ten.focus()"
+        required>
+        <small
+          *ngIf="amount?.errors?.['val'] && (amount?.dirty || amount?.touched) && !amount?.errors?.['required']"
+          class="text-error">
+          Amount should be between {{ validAmount.min }} and {{ validAmount.max }}
+        </small>
+      </div>
+  
+      <div class="form-group">
+        <label for="tenor">Duration (in months) </label>
+        <select
+          #ten
+          [ngClass]="{'error': tenor?.invalid && (tenor?.dirty || tenor?.touched)}"
+          id="tenor"
+          type="text"
+          formControlName="tenor"
+          (keyup.enter)="rd.focus()"
+          required>
+          <option value="">Choose a Duration</option>
+          <option *ngFor="let item of tenors" [value]="item">{{ item }}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="repaymentDate">Repayment Date </label>
+        <select
+          #rd
+          [ngClass]="{'error': repaymentDate?.invalid && (repaymentDate?.dirty || repaymentDate?.touched)}"
+          id="repaymentDate"
+          type="text"
+          formControlName="repaymentDate"
+          required>
+          <option value="">Choose a Date</option>
+          <option *ngFor="let item of dates" [value]="item">{{ item }}</option>
+        </select>
+      </div>  
+    </div>
+
+    <div class="form-step" *ngSwitchCase="5" formGroupName="loan">
+      <p class="summary-desc">Here's a summary of your details. Review and click on submit if all looks great!</p>
+      
+      <div *ngFor="let item of summary" class="step-details">
+        <h3 class="step-details-title">{{ item[0] | summaryTitle }}</h3>
+
+        <dl *ngFor="let sub of item[1]" class="step-detail-inner">
+          <dt>{{ sub[0] | summaryTitle  }}: </dt>
+          <dd>{{ sub[1] }}</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-action-box">
+    <button *ngIf="step !== 1" type="button" class="form-action-btn back" (click)="goBack()">Back</button>
+    <button #fwd *ngIf="step !== 5" type="button" class="form-action-btn forward" (click)="goForward()">Forward</button>
+    <input *ngIf="step === 5" type="submit" class="form-action-btn submit" [value]="submitBtn" [disabled]="processing">
+  </div>
+</form>

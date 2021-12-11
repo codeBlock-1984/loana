@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  position: absolute;
+  right: 0px;
+  z-index: 5000;
+}
+
+.toast-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.toast-body {
+  border-radius: 1;
+  padding: 10px 20px;
+  color: #ffffff;
+  margin: 5px;
+}
+
+.alert-info {
+  background-color: white;
+}
+
+.alert-error {
+  background-color: #ee1f1f;
+}
+
+.alert-success {
+  background-color: #18c93e;
+}

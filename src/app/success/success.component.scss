@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-flow: nowrap column;
+  align-items: center;
+  padding: 0px 20px;
+  padding-top: 200px;
+}
+
+i {
+  font-size: 5rem;
+  margin-bottom: 50px;
+  color: #18c93e;
+}
+
+p {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 420px) {
+  p {
+    font-size: 1rem;
+  }
+}
